@@ -1,4 +1,4 @@
-const fetchCountries = (name) => {
+export const fetchCountries = (name) => {
     fetch(`https://restcountries.eu/rest/v2/name/${name}?fields=name;capital;population;flag;languages`)
   .then(response => {
     if (!response.ok) {
