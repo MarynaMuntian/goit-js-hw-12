@@ -1,6 +1,6 @@
 import './css/styles.css';
 import { fetchCountries } from './js/fetchCountries';
-import { Notify } from "notiflix";
+import { Notify } from 'notiflix';
 import { debounce } from 'lodash';
 import countriesListMarkup from './templates/countries-list.hbs';
 import countryMarkup from './templates/country-markup.hbs';
@@ -17,20 +17,24 @@ const renderCountryCard = (template, country) => {
 };
 
 const isFetchSucces = (value) => {
-    if (value.length > 10) {
-        Notify.Failure('Too many matches found. Please enter a more specific name.');
+    Notify.Init({});
+    try {
+        if (value.length > 10) {
+            Notify.Info('Too many matches found. Please enter a more specific name.');
+        }
+        if (value.length > 1 && value.length <= 10) {
+            renderCountryCard(countriesListMarkup, value);
+        }
+        if (value.length === 1) {
+            renderCountryCard(countryMarkup, value);
+        }
     }
-    if (value.length > 1 && value.length <= 10) {
-        renderCountryCard(countriesListMarkup, value);
-    }
-     if (value.length === 1) {
-        renderCountryCard(countryMarkup, value);
-     }
-    onFetchError();
+    catch { onFetchError();}
 }
 
 const onFetchError = () => {
-    error(Notify.Failure('Oops, there is no country with that name'));
+    Notify.Init({});
+     throw new Error(Notify.Failure('Oops, there is no country with that name'))
 }
 
 const onSearch = () => {
@@ -45,4 +49,4 @@ const onSearch = () => {
         .catch(onFetchError)
 }
 
- searchInput.addEventListener('input', debounce(onSearch, 300));
+ searchInput.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
