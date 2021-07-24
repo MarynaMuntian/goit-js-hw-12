@@ -35,7 +35,7 @@ const onFetchError = () => {
 
 const onSearch = () => {
     cardContainer.innerHTML = ""
-    const searchedCountry = searchInput.target.value;
+    const searchedCountry = searchInput.value;
 
     if (searchedCountry === "")
     { return; }
