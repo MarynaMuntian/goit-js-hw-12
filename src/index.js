@@ -49,4 +49,4 @@ const onSearch = () => {
         .catch(onFetchError)
 }
 
- searchInput.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
+searchInput.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
