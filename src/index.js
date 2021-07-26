@@ -17,10 +17,9 @@ const renderCountryCard = (template, country) => {
 };
 
 const isFetchSucces = (value) => {
-    Notify.Init({});
     try {
         if (value.length > 10) {
-            Notify.Info('Too many matches found. Please enter a more specific name.');
+            Notify.Info({ text: 'Too many matches found. Please enter a more specific name.' });
         }
         if (value.length > 1 && value.length <= 10) {
             renderCountryCard(countriesListMarkup, value);
@@ -33,13 +32,12 @@ const isFetchSucces = (value) => {
 }
 
 const onFetchError = () => {
-    Notify.Init({});
-     throw new Error(Notify.Failure('Oops, there is no country with that name'))
+    throw new Error(Notify.Failure({ text: 'Oops, there is no country with that name' }))
 }
 
 const onSearch = () => {
     cardContainer.innerHTML = ""
-    const searchedCountry = searchInput.value;
+    const searchedCountry = searchInput.value.trim();
 
     if (searchedCountry === "")
     { return; }

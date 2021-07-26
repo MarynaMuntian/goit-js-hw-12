@@ -16,6 +16,13 @@ body {
   padding: 8px;
   max-width: 320px;
   position: fixed;
-  top: 50%;
   left: 40%;
+}
+
+.js-card-container {
+  position: fixed;
+  padding: 10px;
+  top: 20%;
+  left: 40%;
+  background-color: antiquewhite;
 }
