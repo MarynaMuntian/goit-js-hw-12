@@ -28,11 +28,12 @@ const isFetchSucces = (value) => {
             renderCountryCard(countryMarkup, value);
         }
     }
-    catch { onFetchError();}
+    catch { onFetchError}
 }
 
 const onFetchError = () => {
-    throw new Error(Notify.Failure({ text: 'Oops, there is no country with that name' }))
+    throw new Error(
+        Notify.Failure({ text: 'Oops, there is no country with that name' }))
 }
 
 const onSearch = () => {
