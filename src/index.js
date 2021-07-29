@@ -9,12 +9,24 @@ const DEBOUNCE_DELAY = 300;
 
 const searchInput = document.getElementById('search-box');
 const cardContainer = document.querySelector('.js-card-container');
+const countriesList = document.querySelector('.country-list');
 
 const renderCountryCard = (template, country) => {
     const markup = template(country);
     cardContainer.insertAdjacentHTML('beforeend', markup);
 
 };
+
+const clearPage = () => {
+  cardContainer.innerHTML = '';
+  countriesList.innerHTML = '';
+}
+
+const onFetchError = () => {
+     clearPage();
+  searchInput.value = '';
+        Notify.Failure({ text: 'Oops, there is no country with that name' })
+}
 
 const isFetchSucces = (value) => {
     try {
@@ -28,13 +40,10 @@ const isFetchSucces = (value) => {
             renderCountryCard(countryMarkup, value);
         }
     }
-    catch { onFetchError}
+    catch (error) { onFetchError}
 }
 
-const onFetchError = () => {
-    throw new Error(
-        Notify.Failure({ text: 'Oops, there is no country with that name' }))
-}
+
 
 const onSearch = () => {
     cardContainer.innerHTML = ""
